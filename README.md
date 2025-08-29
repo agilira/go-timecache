@@ -22,6 +22,14 @@ Originally developed for Iris, `go-timecache` provides zero-allocation access to
 go get github.com/agilira/go-timecache
 ```
 
+## Documentation
+
+- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running in minutes
+- **[API Reference](docs/API.md)** - Complete API documentation  
+- **[Performance Guide](docs/PERFORMANCE.md)** - Optimization and benchmarking
+- **[FAQ](docs/FAQ.md)** - Frequently asked questions
+- **[Documentation Index](docs/README.md)** - All documentation in one place
+
 ## Usage
 
 ```go
@@ -81,6 +89,10 @@ BenchmarkTimeNowParallel-8              184139052                6.417 ns/op    
 - `CachedTimeString() string`: Get formatted time from this cache
 - `Resolution() time.Duration`: Get this cache's resolution
 - `Stop()`: Stop this cache's background updater
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes and version information.
 
 ## License
 
