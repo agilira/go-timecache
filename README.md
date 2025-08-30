@@ -4,7 +4,7 @@
 [![Go](https://github.com/agilira/go-timecache/actions/workflows/go.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
 [![Security Status](https://img.shields.io/badge/Security-Verified-success.svg)](https://github.com/agilira/go-timecache/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache)](https://goreportcard.com/report/github.com/agilira/go-timecache)
-[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)](https://github.com/agilira/go-timecache/actions)
+[![codecov](https://codecov.io/gh/agilira/go-timecache/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/go-timecache)
 
 Originally developed for Iris, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
 
