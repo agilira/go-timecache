@@ -221,11 +221,13 @@ func TestStopDefaultCache(t *testing.T) {
 	// Wait long enough that it would have updated if running
 	time.Sleep(5 * time.Millisecond)
 
-	// Time should not have changed after stopping
+	// After stopping, the global functions should return the last cached value
+	// and not update anymore (this is the correct behavior)
 	after := CachedTimeNano()
 
+	// The time should be the same (last cached value, not updating)
 	if after != initial {
-		t.Errorf("Time changed after default cache was stopped: initial=%d, after=%d",
+		t.Errorf("Time should not change after stopping default cache: initial=%d, after=%d",
 			initial, after)
 	}
 
