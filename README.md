@@ -2,7 +2,7 @@
 ### an AGILira library
 
 [![Go](https://github.com/agilira/go-timecache/actions/workflows/go.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
-[![Security](https://img.shields.io/badge/security-gosec%20verified-brightgreen.svg)](https://github.com/agilira/go-timecache/actions)
+[![Security](https://img.shields.io/badge/security-gosec-brightgreen.svg)](https://github.com/agilira/go-timecache/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache)](https://goreportcard.com/report/github.com/agilira/go-timecache)
 [![codecov](https://codecov.io/gh/agilira/go-timecache/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/go-timecache)
 
