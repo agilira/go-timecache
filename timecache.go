@@ -1,7 +1,7 @@
 // timecache.go: Ultra-fast time caching implementation
 //
-// Copyright (c) 2025 AGILira
-// Series: an AGLIra fragment
+// Copyright (c) 2025 AGILira - A. Giordano
+// Series: an AGILira library
 // SPDX-License-Identifier: MPL-2.0
 
 package timecache

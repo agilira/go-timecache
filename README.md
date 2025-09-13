@@ -2,11 +2,11 @@
 ### an AGILira library
 
 [![Go](https://github.com/agilira/go-timecache/actions/workflows/go.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
-[![Security](https://img.shields.io/badge/security-gosec-brightgreen.svg)](https://github.com/agilira/go-timecache/actions)
+[![Security](https://img.shields.io/badge/security-gosec-brightgreen.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache)](https://goreportcard.com/report/github.com/agilira/go-timecache)
 [![codecov](https://codecov.io/gh/agilira/go-timecache/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/go-timecache)
 
-Originally developed for Iris, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
+Originally developed for Xantos, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
 
 ## Features
 
@@ -16,7 +16,13 @@ Originally developed for Iris, `go-timecache` provides zero-allocation access to
 - **Simple API**: Drop-in replacement for `time.Now()` with minimal code changes
 - **Multiple formats**: Access time as `time.Time`, nanoseconds, or formatted string
 
-## Installation
+## Compatibility and Support
+
+go-plugins is designed for Go 1.24+ environments and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
+
+## Quick Start
+
+### Installation
 
 ```bash
 go get github.com/agilira/go-timecache
@@ -51,6 +57,7 @@ customTime := tc.CachedTime()
 Benchmarks show dramatic improvements over standard `time.Now()`:
 
 ```
+AMD Ryzen 5 7520U with Radeon Graphics
 BenchmarkTimeNow-8                      25118025                42.98 ns/op            0 B/op          0 allocs/op
 BenchmarkCachedTime-8                   1000000000               0.3549 ns/op          0 B/op          0 allocs/op
 BenchmarkCachedTimeNano-8               1000000000               0.3574 ns/op          0 B/op          0 allocs/op
@@ -59,16 +66,14 @@ BenchmarkCachedTimeParallel-8           1000000000               0.1737 ns/op   
 BenchmarkTimeNowParallel-8              184139052                6.417 ns/op           0 B/op          0 allocs/op
 ```
 
+**Reproduce benchmarks**:
+```bash
+go test -bench=. -benchmem
+```
+
 * `CachedTime` is **~121x faster** than `time.Now()`
 * `CachedTimeParallel` is **~37x faster** than parallel `time.Now()`
 * Zero heap allocations in all operations
-
-## When to Use
-
-- **High-volume logging**: Eliminate time-related allocations in hot paths
-- **Metrics collection**: Timestamp events with minimal overhead
-- **Real-time systems**: Get consistent timestamps with predictable performance
-- **Microservices**: Reduce GC pressure from frequent timestamp generation
 
 ## API Reference
 

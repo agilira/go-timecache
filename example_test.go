@@ -1,7 +1,7 @@
 // example_test.go: Usage examples for timecache library
 //
-// Copyright (c) 2025 AGILira
-// Series: an AGLIra fragment
+// Copyright (c) 2025 AGILira - A. Giordano
+// Series: an AGILira library
 // SPDX-License-Identifier: MPL-2.0
 
 package timecache_test
