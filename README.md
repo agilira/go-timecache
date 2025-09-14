@@ -3,10 +3,13 @@
 
 [![Go](https://github.com/agilira/go-timecache/actions/workflows/go.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
 [![Security](https://img.shields.io/badge/security-gosec-brightgreen.svg)](https://github.com/agilira/go-timecache/actions/workflows/go.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache)](https://goreportcard.com/report/github.com/agilira/go-timecache)
+[![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache?v=2)](https://goreportcard.com/report/github.com/agilira/go-timecache)
 [![codecov](https://codecov.io/gh/agilira/go-timecache/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/go-timecache)
+[![GoDoc](https://godoc.org/github.com/agilira/go-timecache?status.svg)](https://godoc.org/github.com/agilira/go-timecache)
 
-Originally developed for Xantos, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
+**[Features](#features) • [Quick Start](#quick-start) • [Performance](#performance) • [Usage](#usage) • [API Reference](#api-reference) • [Documentation](#documentation)**
+
+Part of our Xantos Core, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
 
 ## Features
 
@@ -18,7 +21,30 @@ Originally developed for Xantos, `go-timecache` provides zero-allocation access 
 
 ## Compatibility and Support
 
-go-plugins is designed for Go 1.24+ environments and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
+go-timecache is designed for Go 1.23+ environments and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
+
+## Performance
+
+Benchmarks show dramatic improvements over standard `time.Now()`:
+
+```
+AMD Ryzen 5 7520U with Radeon Graphics
+BenchmarkTimeNow-8                      25118025           42.98 ns/op          0 B/op         0 allocs/op
+BenchmarkCachedTime-8                   1000000000         0.3549 ns/op         0 B/op         0 allocs/op
+BenchmarkCachedTimeNano-8               1000000000         0.3574 ns/op         0 B/op         0 allocs/op
+BenchmarkTimeNowUnixNano-8              27188656           42.68 ns/op          0 B/op         0 allocs/op
+BenchmarkCachedTimeParallel-8           1000000000         0.1737 ns/op         0 B/op         0 allocs/op
+BenchmarkTimeNowParallel-8              184139052          6.417 ns/op          0 B/op         0 allocs/op
+```
+
+**Reproduce benchmarks**:
+```bash
+go test -bench=. -benchmem
+```
+
+* `CachedTime` is **~121x faster** than `time.Now()`
+* `CachedTimeParallel` is **~37x faster** than parallel `time.Now()`
+* Zero heap allocations in all operations
 
 ## Quick Start
 
@@ -27,14 +53,6 @@ go-plugins is designed for Go 1.24+ environments and follows Long-Term Support g
 ```bash
 go get github.com/agilira/go-timecache
 ```
-
-## Documentation
-
-- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running in minutes
-- **[API Reference](docs/API.md)** - Complete API documentation  
-- **[Performance Guide](docs/PERFORMANCE.md)** - Optimization and benchmarking
-- **[FAQ](docs/FAQ.md)** - Frequently asked questions
-- **[Documentation Index](docs/README.md)** - All documentation in one place
 
 ## Usage
 
@@ -51,29 +69,6 @@ defer tc.Stop()  // Important: remember to stop when done
 
 customTime := tc.CachedTime()
 ```
-
-## Performance
-
-Benchmarks show dramatic improvements over standard `time.Now()`:
-
-```
-AMD Ryzen 5 7520U with Radeon Graphics
-BenchmarkTimeNow-8                      25118025                42.98 ns/op            0 B/op          0 allocs/op
-BenchmarkCachedTime-8                   1000000000               0.3549 ns/op          0 B/op          0 allocs/op
-BenchmarkCachedTimeNano-8               1000000000               0.3574 ns/op          0 B/op          0 allocs/op
-BenchmarkTimeNowUnixNano-8              27188656                42.68 ns/op            0 B/op          0 allocs/op
-BenchmarkCachedTimeParallel-8           1000000000               0.1737 ns/op          0 B/op          0 allocs/op
-BenchmarkTimeNowParallel-8              184139052                6.417 ns/op           0 B/op          0 allocs/op
-```
-
-**Reproduce benchmarks**:
-```bash
-go test -bench=. -benchmem
-```
-
-* `CachedTime` is **~121x faster** than `time.Now()`
-* `CachedTimeParallel` is **~37x faster** than parallel `time.Now()`
-* Zero heap allocations in all operations
 
 ## API Reference
 
@@ -94,6 +89,14 @@ go test -bench=. -benchmem
 - `CachedTimeString() string`: Get formatted time from this cache
 - `Resolution() time.Duration`: Get this cache's resolution
 - `Stop()`: Stop this cache's background updater
+
+## Documentation
+
+- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running in minutes
+- **[API Reference](docs/API.md)** - Complete API documentation  
+- **[Performance Guide](docs/PERFORMANCE.md)** - Optimization and benchmarking
+- **[FAQ](docs/FAQ.md)** - Frequently asked questions
+- **[Documentation Index](docs/README.md)** - All documentation in one place
 
 ## Changelog
 
