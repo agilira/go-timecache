@@ -1,7 +1,7 @@
 # go-timecache: Ultra-fast time caching for high-performance Go applications
 ### an AGILira library
 
-[![Go](https://github.com/agilira/go-timecache/actions/workflows/go.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/agilira/go-timecache/actions/workflows/ci.yml/badge.svg)](https://github.com/agilira/go-timecache/actions/workflows/ci.yml)
 [![Security](https://img.shields.io/badge/security-gosec-brightgreen.svg)](https://github.com/agilira/go-timecache/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/go-timecache?v=2)](https://goreportcard.com/report/github.com/agilira/go-timecache)
 [![codecov](https://codecov.io/gh/agilira/go-timecache/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/go-timecache)
