@@ -33,6 +33,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced badge presentation for project quality indicators
 - Better mobile responsiveness for documentation access
 
+## [v1.0.1] - 2025-01-27
+
+### Added
+- Complete project documentation and licensing infrastructure
+- `LICENSE.md` with Mozilla Public License 2.0 for open source compliance
+- `README.md` with comprehensive API documentation and usage examples
+- `SECURITY.md` with vulnerability reporting guidelines
+- `example_test.go` with practical usage examples and benchmarks
+- `go.mod` for proper Go module definition
+- `timecache.go` with core TimeCache implementation
+- `timecache_test.go` with comprehensive test suite
+
+### Documentation
+- Professional README with performance benchmarks and use cases
+- Complete API reference with all public methods documented
+- Security policy for responsible vulnerability disclosure
+- Working examples demonstrating zero-allocation patterns
+
+### Infrastructure
+- Go module setup for proper dependency management
+- Complete test coverage with performance benchmarks
+- Professional project structure following Go best practices
+
 ## [v1.0.0] - 2025-01-27
 
 ### Added
@@ -71,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version History
 
 - **v1.0.0** (2025-01-27): Initial release with core functionality  
+- **v1.0.1** (2025-01-27): Complete project documentation, licensing, and infrastructure
 - **v1.0.2** (2025-09-14): Quality improvements, README enhancements, and codecov integration
 
 ## Contributing
