@@ -29,7 +29,7 @@
 //	defer tc.Stop()
 //	customTime := tc.CachedTime()
 //
-// Copyright (c) 2025 AGILira
+// Copyright (c) 2025 AGILira - A. Giordano
 // Series: an AGLIra fragment
 // SPDX-License-Identifier: MPL-2.0
 package timecache
