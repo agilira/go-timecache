@@ -1230,6 +1230,18 @@ body {
     .breadcrumb-item {
         white-space: nowrap;
     }
+    
+    /* Tables responsive for tablet */
+    .content table {
+        overflow-x: auto;
+        display: block;
+    }
+    
+    .content th,
+    .content td {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--font-size-sm);
+    }
 }
 
 @media (max-width: 480px) {
@@ -1245,6 +1257,9 @@ body {
     .code-block {
         margin: var(--space-3) 0 !important;
         border-radius: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .code-block pre[class*="language-"],
@@ -1327,6 +1342,31 @@ body {
     .breadcrumb-item {
         white-space: nowrap;
         font-size: var(--font-size-xs);
+    }
+    
+    /* Tables responsive - Prevent overflow on mobile */
+    .content table {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+    
+    .content table thead,
+    .content table tbody,
+    .content table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    .content th,
+    .content td {
+        padding: var(--space-2) var(--space-2);
+        font-size: var(--font-size-xs);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
