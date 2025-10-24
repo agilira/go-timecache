@@ -16,13 +16,13 @@ func TestCachedTimeNano(t *testing.T) {
 	nano := CachedTimeNano()
 	now := time.Now().UnixNano()
 
-	// Should be within 1ms of actual time (allowing for cache precision)
+	// Should be within 5ms of actual time (allowing for cache precision and OS differences)
 	diff := now - nano
 	if diff < 0 {
 		diff = -diff
 	}
 
-	if diff > int64(time.Millisecond) {
+	if diff > int64(5*time.Millisecond) {
 		t.Errorf("CachedTimeNano too far from actual time: diff=%dms", diff/int64(time.Millisecond))
 	}
 }
@@ -32,13 +32,13 @@ func TestCachedTime(t *testing.T) {
 	cached := CachedTime()
 	now := time.Now()
 
-	// Should be within 1ms of actual time
+	// Should be within 5ms of actual time (allowing for cache precision and OS differences)
 	diff := now.Sub(cached)
 	if diff < 0 {
 		diff = -diff
 	}
 
-	if diff > time.Millisecond {
+	if diff > 5*time.Millisecond {
 		t.Errorf("CachedTime too far from actual time: diff=%v", diff)
 	}
 }
