@@ -9,6 +9,8 @@
 
 **[Features](#features) • [Quick Start](#quick-start) • [Performance](#performance) • [Usage](#usage) • [API Reference](#api-reference) • [Documentation](#documentation)**
 
+Complete documentation is available at: [https://agilira.github.io/go-timecache/](https://agilira.github.io/go-timecache/)
+
 Part of our Xantos Core, `go-timecache` provides zero-allocation access to cached time values, eliminating the performance overhead of repeated `time.Now()` calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
 
 ## Features
@@ -92,15 +94,7 @@ customTime := tc.CachedTime()
 
 ## Documentation
 
-- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running in minutes
-- **[API Reference](docs/API.md)** - Complete API documentation  
-- **[Performance Guide](docs/PERFORMANCE.md)** - Optimization and benchmarking
-- **[FAQ](docs/FAQ.md)** - Frequently asked questions
-- **[Documentation Index](docs/README.md)** - All documentation in one place
-
-## Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes and version information.
+[https://agilira.github.io/go-timecache/](https://agilira.github.io/go-timecache/)
 
 ## License
 
