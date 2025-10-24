@@ -25,6 +25,7 @@ class DocumentationApp {
         this.setupSitemapGeneration();
         this.setupRobotsGeneration();
         this.setupDeveloperTools();
+        this.setupScrollToTop();
     }
 
     // Sidebar mobile
@@ -681,6 +682,44 @@ class DocumentationApp {
         });
 
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    }
+
+    // Scroll to Top Button - WCAG 2.2 AA Compliant
+    setupScrollToTop() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        if (!scrollToTopBtn) return;
+
+        // Show/hide button based on scroll position
+        const toggleScrollButton = () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        };
+
+        // Smooth scroll to top
+        const scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+
+        // Event listeners
+        window.addEventListener('scroll', toggleScrollButton, { passive: true });
+        scrollToTopBtn.addEventListener('click', scrollToTop);
+
+        // Keyboard accessibility
+        scrollToTopBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollToTop();
+            }
+        });
+
+        // Initial state
+        toggleScrollButton();
     }
 }
 

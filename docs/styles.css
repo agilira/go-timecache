@@ -1220,6 +1220,16 @@ body {
     .footer-legal-separator {
         display: none;
     }
+    
+    /* Breadcrumb responsive - Allow wrapping on mobile */
+    .breadcrumb-list {
+        flex-wrap: wrap;
+        gap: var(--space-1);
+    }
+    
+    .breadcrumb-item {
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1233,7 +1243,7 @@ body {
     
     /* Code blocks for small screens - Override Prism completely */
     .code-block {
-        margin: var(--space-3) calc(-1 * var(--space-3)) !important;
+        margin: var(--space-3) 0 !important;
         border-radius: 0 !important;
     }
     
@@ -1305,6 +1315,18 @@ body {
     .cookie-accept-btn,
     .cookie-decline-btn {
         width: 100%;
+    }
+    
+    /* Breadcrumb for very small screens */
+    .breadcrumb-list {
+        flex-wrap: wrap;
+        gap: var(--space-1);
+        line-height: 1.4;
+    }
+    
+    .breadcrumb-item {
+        white-space: nowrap;
+        font-size: var(--font-size-xs);
     }
 }
 
@@ -2406,6 +2428,70 @@ textarea:focus-visible {
 *:focus-visible {
     z-index: 9999 !important;
     position: relative;
+}
+
+/* Scroll to Top Button - WCAG 2.2 AA Compliant */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: var(--primary-600);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all var(--transition-fast);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.scroll-to-top.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: var(--primary-700);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top:focus {
+    outline: 2px solid var(--primary-400);
+    outline-offset: 2px;
+}
+
+.scroll-to-top:active {
+    transform: translateY(0);
+}
+
+/* Dark mode scroll to top */
+[data-theme="dark"] .scroll-to-top {
+    background: var(--primary-500);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .scroll-to-top:hover {
+    background: var(--primary-400);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+    }
 }
 
 .developer-tools h4 {
