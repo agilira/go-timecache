@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://agilira.github.io/go-timecache/sitemap.xml

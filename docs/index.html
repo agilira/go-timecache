@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>go-timecache | AGILira Docs</title>
+    <meta name="description" property="og:description" content="go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated time.Now() calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.">
+    <meta name="keywords" content="documentation template, go-timecache, accessibility, responsive design, modern UI, developer tools">
+    <meta name="author" content="AGILira">
+    
+    <!-- Open Graph / Facebook - Fallback for accessibility -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agilira.github.io/go-timecache/">
+    <meta property="og:title" content="go-timecache Documentation">
+    <meta property="og:description" content="go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated time.Now() calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.">
+    <meta property="og:image" content="https://agilira.github.io/go-timecache/og-image.png">
+    <meta property="og:site_name" content="go-timecache Documentation">
+
+    <!-- Twitter - Fallback for accessibility -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://agilira.github.io/go-timecache/">
+    <meta property="twitter:title" content="go-timecache Documentation">
+    <meta property="twitter:description" content="go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated time.Now() calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.">
+    <meta property="twitter:image" content="https://agilira.github.io/go-timecache/og-image.png">
+    <meta property="twitter:site" content="@agilirax">
+    <meta property="twitter:creator" content="@agilirax">
+    
+    <!-- Enhanced by config.js when JavaScript is available -->
+    
+    <!-- Favicon base -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+    
+    <!-- Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+    
+    <!-- Fallback -->
+    <link rel="icon" type="image/png" href="favicon-32.png">
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "go-timecache",
+        "description": "go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated time.Now() calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.",
+        "applicationCategory": "DeveloperApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="https://github.com/agilira" class="logo-img-link" target="_blank" rel="noopener">
+                    <img src="assets/logo-black.png" alt="Agilira Logo" class="logo-img" width="32" height="32" loading="eager">
+                </a>
+                <a href="https://github.com/agilira/go-timecache" class="project-name" target="_blank" rel="noopener">
+                    go-timecache
+                </a>
+                <nav class="header-nav" aria-label="Main navigation">
+                    <a href="index.html">Documentation</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="https://github.com/agilira/go-timecache" class="header-action-btn" target="_blank" rel="noopener" aria-label="View repository on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <button type="button" class="header-action-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="theme-icon-light">
+                            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="theme-icon-dark" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <button type="button" class="sidebar-toggle mobile-only" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar" role="complementary" aria-label="Sidebar">
+            <nav class="sidebar-nav" aria-label="Sidebar navigation">
+                <!-- Fallback navigation for accessibility (works without JS) -->
+                <div class="nav-section">
+                    <div class="nav-section-title">Documentation</div>
+                    <ul class="nav-list">
+                        <ul class="nav-list">
+                            <li><a href="index.html" class="nav-item active">Overview</a></li>
+                            <li><a href="api-reference.html" class="nav-item">API Reference</a></li>
+                            <li><a href="https://github.com/agilira/go-timecache" class="nav-item" target="_blank" rel="noopener">GitHub Repository</a></li>
+                            <li><a href="https://agilira.one" class="nav-item">Blog</a></li>
+                        </ul>
+                    </ul>
+                </div>
+                <!-- Populated dynamically by config.js (enhances fallback) -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content" role="main">
+            <div class="content-container">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <!-- Fallback breadcrumb for accessibility (works without JS) -->
+                        <li class="breadcrumb-item"><a href="https://github.com/agilira" target="_blank" rel="noopener">AGILira</a></li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-item"><a href="https://github.com/agilira/go-timecache" target="_blank" rel="noopener">Chiron</a></li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-item current">Documentation</li>
+                        <!-- Populated dynamically by config.js (enhances fallback) -->
+                    </ol>
+                </nav>
+
+                <!-- Page Header -->
+                <header class="page-header" aria-label="Page header">
+                    <h1 class="page-title">go-timecache</h1>
+                    <hr>
+                    <p class="page-description">
+                        <strong>an AGILira library</strong><br>
+                        go-timecache is a high-performance time caching library for Go that eliminates the overhead of repeated time.Now() calls by maintaining a cached timestamp that is updated at configurable intervals.
+                    </p>
+                </header>
+
+                <!-- Content -->
+                <div class="content">
+                    <section class="content-section" id="overview">
+                        <h2>Features</h2>
+                        <ul>
+                            <li><strong>Zero-allocation time access</strong>: Get current time without heap allocations</li>
+                            <li><strong>Configurable precision</strong>: Choose your ideal balance between accuracy and performance</li>
+                            <li><strong>Thread-safe</strong>: Safe for concurrent use from multiple goroutines</li>
+                            <li><strong>Simple API</strong>: Drop-in replacement for <code>time.Now()</code> with minimal code changes</li>
+                            <li><strong>Multiple formats</strong>: Access time as time.Time, nanoseconds, or formatted string</li>
+                        </ul>
+                        <div class="feature-grid">
+                            <!-- Feature Card -->
+                            <a href="#performance" class="feature-card" aria-label="Learn more about Performance">
+                                <div class="feature-icon" aria-hidden="true">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <h3>Performance</h3>
+                                <p>Benchmarks show dramatic improvements over <code>time.Now()</code>.</p>
+                            </a>
+                            <!-- Feature Card  end -->
+
+                             <!-- Feature Card -->
+                            <a href="#faq" class="feature-card" aria-label="Common questions and answers about go-timecache.">
+                                <div class="feature-icon" aria-hidden="true">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+                                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                                        <path d="M8.5 8.5l-1-1M15.5 8.5l1-1M8.5 15.5l-1 1M15.5 15.5l1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <h3>FAQ</h3>
+                                <p>Frequently Asked Questions about go-timecache.</p>
+                            </a>
+                            <!-- Feature Card end -->
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2>Quick Start</h2>
+                        <p class="page-description">
+                            Part of our Xantos Core, go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated <code>time.Now()</code> calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.
+                        </p>
+                        <h3>Installation</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">bash</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-bash">go get github.com/agilira/go-timecache</code></pre>
+                        </div>
+                        <h3>Usage</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">bash</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-bash">import "github.com/agilira/go-timecache"
+
+// Using the default global cache
+now := timecache.CachedTime()
+nanos := timecache.CachedTimeNano()  // Zero allocation!
+
+// Create your own cache with custom settings
+tc := timecache.NewWithResolution(1 * time.Millisecond)
+defer tc.Stop()  // Important: remember to stop when done
+
+customTime := tc.CachedTime()</code></pre>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="content-section" id="performance">
+                        <h2>Performance</h2>
+                        <p><code>CachedTime</code> is ~121x faster than <code>time.Now()</code> and <code>CachedTimeParallel</code> is ~37x faster than parallel <code>time.Now()</code> with Zero allocations in all ops.</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">bash</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-bash">BenchmarkTimeNow-8                      25118025    42.98 ns/op    0 B/op    0 allocs/op
+BenchmarkCachedTime-8                   1000000000   0.3549 ns/op  0 B/op    0 allocs/op
+BenchmarkCachedTimeNano-8               1000000000   0.3574 ns/op  0 B/op    0 allocs/op
+BenchmarkTimeNowUnixNano-8              27188656    42.68 ns/op    0 B/op    0 allocs/op
+BenchmarkCachedTimeParallel-8           1000000000   0.1737 ns/op  0 B/op    0 allocs/op
+BenchmarkTimeNowParallel-8              184139052    6.417 ns/op   0 B/op    0 allocs/op</code></pre>
+                        </div>
+                        <h3>Reproduce Benchmarks</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">bash</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-bash">go test -bench=. -benchmem</code></pre>
+                        </div>
+                    </section>
+                    <hr>
+                    <section class="content-section" id="faq">
+                        <h2>Frequently Asked Questions</h2>
+                            <h3>What is go-timecache?</h3>
+                            <p>go-timecache is a high-performance time caching library for Go that eliminates the overhead of repeated <code>time.Now()</code> calls by maintaining a cached timestamp that is updated at configurable intervals.</p>
+                            
+                            <h3>Why should I use go-timecache instead of time.Now()?</h3>
+                            <ul>
+                                <li><strong>Performance</strong>: go-timecache is ~121x faster than <code>time.Now()</code></li>
+                                <li><strong>Zero allocations</strong>: No heap allocations for time access</li>
+                                <li><strong>Consistency</strong>: Predictable performance regardless of system load</li>
+                                <li><strong>Configurable precision</strong>: Choose the right balance between accuracy and CPU usage</li>
+                            </ul>
+                            
+                            <h3>Is go-timecache thread-safe?</h3>
+                            <p>Yes, all methods are thread-safe and can be called concurrently from multiple goroutines without additional synchronization.</p>
+                            
+                            <h3>How does it work internally?</h3>
+                            <p>go-timecache runs a background goroutine that updates a cached timestamp at regular intervals. All access methods use atomic operations to read the cached value safely.</p>
+                            
+                            <h3>What's the precision of the cached time?</h3>
+                            <p>The precision depends on the resolution you choose. The default 500&micro;s resolution means the cached time is updated every 500 microseconds.</p>
+                            
+                            <h3>Is the cached time always accurate?</h3>
+                            <p>The cached time is accurate within the resolution interval. For example, with 1ms resolution, the cached time may be up to 1ms behind the actual time.</p>
+                            
+                            <h3>Can I use it with time zones?</h3>
+                            <p>The cached time is always in UTC. You can convert it to other time zones using Go's time package:
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span class="code-language">bash</span>
+                                        <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                                    </div>
+                                    <pre class="line-numbers"><code class="language-go">utcTime := timecache.CachedTime()
+localTime := utcTime.Local()</code></pre>
+                                </div>
+                            </p>
+
+                    </section>
+                    <hr>
+                    <section class="content-section">
+                        <h2>Compatibility and support</h2>
+                        <p>go-timecache is designed for Go 1.23+ environments and follows Long-Term Support guidelines to ensure consistent performance across production deployments.</p>
+                    </section>
+                </div>
+
+                <!-- Footer -->
+                <footer class="site-footer" role="contentinfo">
+                    <div class="footer-container">
+                        <div class="footer-content">
+                            <div class="footer-main">
+                                <div class="footer-brand">
+                        <a href="https://github.com/agilira" target="_blank" rel="noopener" class="footer-logo-link">
+                            <img src="assets/logo-footer.png" alt="Agilira Logo" class="footer-logo" width="32" height="32" loading="lazy">
+                        </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="footer-bottom">
+                            <div class="footer-bottom-content">
+                                <p class="footer-copyright">
+                                    &copy; <span class="copyright-year">2025</span> <span class="copyright-holder">AGILira</span>. All rights reserved.
+                                </p>
+                                <div class="footer-legal">
+                                    <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
+                                    <a href="terms-of-service.html" class="footer-legal-link">Terms of Service</a>
+                                    <a href="cookie-policy.html" class="footer-legal-link">Cookie Policy</a>
+                                    <button type="button" class="cookie-consent-btn" id="cookieConsentBtn">Manage Cookies</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <p>We use cookies to improve your browsing experience and provide personalized features. By continuing to use this site, you accept our use of cookies.</p>
+            </div>
+            <div class="cookie-banner-actions">
+                <a href="cookie-policy.html" class="cookie-policy-link">Cookie Policy</a>
+                <button type="button" class="cookie-accept-btn" id="cookieAcceptBtn">Accept</button>
+                <button type="button" class="cookie-decline-btn" id="cookieDeclineBtn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developer Tools (hidden by default) -->
+    <div id="developerTools" class="developer-tools">
+        <h4>Developer Tools</h4>
+        <div>
+            <button type="button" class="sitemap-generate-btn" id="sitemapGenerateBtn" title="Generate sitemap.xml">&#128196; Sitemap</button>
+            <button type="button" class="robots-generate-btn" id="robotsGenerateBtn" title="Generate robots.txt">&#129302; Robots</button>
+        </div>
+    </div>
+
+    <!-- Load configuration data (works with file:// protocol) -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize configuration system
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('DOM loaded, initializing configuration...');
+            
+            // Initialize DocumentationApp first
+            window.documentationApp = new DocumentationApp();
+            
+            // Load and apply configuration
+            await window.chironConfig.load();
+            window.chironConfig.apply();
+            
+            console.log('All systems initialized');
+        });
+    </script>
+    
+    <!-- Prism.js is now loaded dynamically via script.js for better performance -->
+</body>
+</html>

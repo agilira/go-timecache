@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference | go-timecache - AGILira Docs</title>
+    <meta name="description" property="og:description" content="Complete API reference for go-timecache library. Ultra-fast time caching for high-performance Go applications.">
+    <meta name="keywords" content="go-timecache, API reference, Go library, time caching, performance, documentation">
+    <meta name="author" content="AGILira">
+    
+    <!-- Open Graph / Facebook - Fallback for accessibility -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agilira.github.io/go-timecache/api-reference.html">
+    <meta property="og:title" content="API Reference - go-timecache Documentation">
+    <meta property="og:description" content="Complete API reference for go-timecache library. Ultra-fast time caching for high-performance Go applications.">
+    <meta property="og:image" content="https://agilira.github.io/go-timecache/og-image.png">
+    <meta property="og:site_name" content="go-timecache Documentation">
+
+    <!-- Twitter - Fallback for accessibility -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://agilira.github.io/go-timecache/api-reference.html">
+    <meta property="twitter:title" content="API Reference - go-timecache Documentation">
+    <meta property="twitter:description" content="Complete API reference for go-timecache library. Ultra-fast time caching for high-performance Go applications.">
+    <meta property="twitter:image" content="https://agilira.github.io/go-timecache/og-image.png">
+    <meta property="twitter:site" content="@agilirax">
+    <meta property="twitter:creator" content="@agilirax">
+    
+    <!-- Enhanced by config.js when JavaScript is available -->
+    
+    <!-- Favicon base -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+    
+    <!-- Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+    
+    <!-- Fallback -->
+    <link rel="icon" type="image/png" href="favicon-32.png">
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "go-timecache",
+        "description": "go-timecache provides zero-allocation access to cached time values, eliminating the performance overhead of repeated time.Now() calls in high-throughput scenarios like logging, metrics collection, and real-time data processing.",
+        "applicationCategory": "DeveloperApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="https://github.com/agilira" class="logo-img-link" target="_blank" rel="noopener">
+                    <img src="assets/logo-black.png" alt="Agilira Logo" class="logo-img" width="32" height="32" loading="eager">
+                </a>
+                <a href="https://github.com/agilira/go-timecache" class="project-name" target="_blank" rel="noopener">
+                    go-timecache
+                </a>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link active">Documentation</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="https://github.com/agilira/go-timecache" class="header-action-btn" target="_blank" rel="noopener" aria-label="View repository on GitHub">
+                        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <button type="button" class="header-action-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="theme-icon-light">
+                            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="theme-icon-dark" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <button type="button" class="sidebar-toggle mobile-only" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <!-- Fallback navigation for accessibility (works without JS) -->
+                <div class="nav-section">
+                    <div class="nav-section-title">Documentation</div>
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-item active">Overview</a></li>
+                        <li><a href="api-reference.html" class="nav-item">API Reference</a></li>
+                        <li><a href="https://github.com/agilira/go-timecache" class="nav-item" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://agilira.one" class="nav-item">Blog</a></li>
+                    </ul>
+                </div>
+                <!-- Populated dynamically by config.js (enhances fallback) -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            <div class="content-container">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <!-- Fallback breadcrumb for accessibility (works without JS) -->
+                        <li class="breadcrumb-item"><a href="https://github.com/agilira" target="_blank" rel="noopener">AGILira</a></li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-item"><a href="https://github.com/agilira/go-timecache" target="_blank" rel="noopener">go-timecache</a></li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-item"><a href="index.html">Documentation</a></li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-item current">API Reference</li>
+                        <!-- Populated dynamically by config.js (enhances fallback) -->
+                    </ol>
+                </nav>
+
+                <!-- Page Header -->
+                <header class="page-header">
+                    <h1 class="subpage-title">API Reference</h1>
+                    
+                    <!-- Table of Contents -->
+                    <nav class="api-toc-horizontal">
+                        <div class="api-toc-links">
+                            <a href="#section1" class="api-toc-link">CachedTimeNano</a>
+                            <a href="#section2" class="api-toc-link">CachedTime</a>
+                            <a href="#section3" class="api-toc-link">CachedTimeString</a>
+                            <a href="#section4" class="api-toc-link">DefaultCache</a>
+                            <a href="#section5" class="api-toc-link">StopDefaultCache</a>
+                            <a href="#section6" class="api-toc-link">Cache Creation Functions</a>
+                            <a href="#section7" class="api-toc-link">NewWithResolution</a>
+                            <a href="#section8" class="api-toc-link">TimeCache Methods</a>
+                            <a href="#section9" class="api-toc-link">CachedTime (Method)</a>
+                            <a href="#section10" class="api-toc-link">CachedTimeString (Method)</a>
+                            <a href="#section11" class="api-toc-link">Resolution</a>
+                            <a href="#section12" class="api-toc-link">Stop</a>
+                            <a href="#section13" class="api-toc-link">Performance Characteristics</a>
+                            <a href="#section14" class="api-toc-link">Error Handling</a>
+                        </div>
+                    </nav>
+                </header>
+
+                <!-- Content -->
+                <div class="content">
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h2>Global Functions</h2>
+                        <h3 id="section1">CachedTimeNano</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func CachedTimeNano() int64</code></pre>
+                        </div>
+                        <p>Returns the cached time in nanoseconds since Unix epoch from the default cache. This function provides zero-allocation access to the current timestamp and is the fastest way to get time information.</p>
+                        <p><strong>Returns:</strong> <code>int64</code> - Nanoseconds since January 1, 1970 UTC</p>
+                        <p><strong>Performance:</strong> Zero allocation, atomic read operation</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">nano := timecache.CachedTimeNano()
+fmt.Printf("Timestamp: %d nanoseconds\n", nano)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section2">CachedTime</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func CachedTime() time.Time</code></pre>
+                        </div>
+                        <p>Returns the cached time as a time.Time value from the default cache. This function converts the internal nanosecond timestamp to a time.Time for convenient use with Go's time package functions.</p>
+                        <p><strong>Returns:</strong> <code>time.Time</code> - Current cached time</p>
+                        <p><strong>Performance:</strong> Minimal allocation for time.Time conversion</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">now := timecache.CachedTime()
+fmt.Printf("Current time: %v\n", now)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3  id="section3">CachedTimeString</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func CachedTimeString() string</code></pre>
+                        </div>
+                        <p>Returns the cached time formatted as an RFC3339Nano string from the default cache. The returned string is in UTC timezone and follows the format: "2006-01-02T15:04:05.999999999Z07:00"</p>
+                        <p><strong>Returns:</strong> <code>string</code> - Formatted time string in RFC3339Nano format</p>
+                        <p><strong>Performance:</strong> String allocation for formatting</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">timeStr := timecache.CachedTimeString()
+fmt.Printf("ISO timestamp: %s\n", timeStr)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block  end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section4">DefaultCache</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func DefaultCache() *TimeCache</code></pre>
+                        </div>
+                        <p>Returns the global default TimeCache instance. This allows access to the default cache for advanced operations like checking resolution or stopping the cache.</p>
+                        <p><strong>Returns:</strong> <code>*TimeCache</code> - The default cache instance</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">defaultCache := timecache.DefaultCache()
+fmt.Printf("Default cache resolution: %v\n", defaultCache.Resolution())</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section5">StopDefaultCache</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func StopDefaultCache()</code></pre>
+                        </div>
+                        <p>Stops the global default time cache. After calling this function, the default cache will no longer be updated and the background goroutine will terminate.</p>
+                        <p><strong>Note:</strong> This function is mainly intended for testing and shutdown scenarios. In normal application usage, the default cache should remain running.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">// During application shutdown
+timecache.StopDefaultCache()</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section6">Cache Creation Functions</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func New() *TimeCache</code></pre>
+                        </div>
+                        <p>Creates a new TimeCache with default resolution (500&micro;s). The default resolution provides a good balance between accuracy and CPU usage for most high-throughput applications.</p>
+                        <p><strong>Returns:</strong> <code>*TimeCache</code> - New cache instance.</p>
+                        <p><strong>Performance:</strong> Starts background goroutine immediately.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.New()
+defer tc.Stop()
+now := tc.CachedTime()</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section7">NewWithResolution</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func NewWithResolution(resolution time.Duration) *TimeCache</code></pre>
+                        </div>
+                        <p>Creates a new TimeCache with custom update resolution. The resolution parameter controls how frequently the cached time is updated. Smaller values provide more accurate timestamps but consume more CPU.</p>
+                        <p><strong>Parameters:</strong></p>
+                        <ul>
+                            <li><code>resolution time.Duration</code> - The update interval for the cache</li>
+                        </ul>
+                        <p><strong>Returns:</strong> <code>*TimeCache</code> - New cache instance with custom resolution</p>
+                        <p><strong>Recommended resolution values:</strong></p>
+                        <ul>
+                            <li>100&micro;s to 500&micro;s: High precision, suitable for real-time systems</li>
+                            <li>1ms to 10ms: Balanced performance, good for most applications</li>
+                            <li>>10ms: Minimal CPU impact, suitable for non-critical timing</li>
+                        </ul>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">// High precision cache for real-time logging
+tc := timecache.NewWithResolution(100 * time.Microsecond)
+defer tc.Stop()
+
+// Balanced cache for general use  
+tc2 := timecache.NewWithResolution(1 * time.Millisecond)
+defer tc2.Stop()</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h2>TimeCache Methods</h2> 
+                        <h3 id="section8">CachedTimeNano</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func (tc *TimeCache) CachedTimeNano() int64</code></pre>
+                        </div>
+                        <p>Returns the cached time in nanoseconds since Unix epoch. This method provides zero-allocation access to the current timestamp and is the fastest way to get time information from the cache.</p>
+                        <p><strong>Performance:</strong> Zero allocation, atomic read operation</p>
+                        <p><strong>Returns:</strong> <code>int64</code>: Nanoseconds since January 1, 1970 UTC</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.New()
+defer tc.Stop()
+nano := tc.CachedTimeNano()
+fmt.Printf("Timestamp: %d nanoseconds\n", nano)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section9">CachedTime</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func (tc *TimeCache) CachedTime() time.Time</code></pre>
+                        </div>
+                        <p>Returns the cached time as a time.Time value. This method converts the internal nanosecond timestamp to a time.Time for convenient use with Go's time package functions.</p>
+                        <p><strong>Returns:</strong> <code>time.Time</code>: The cached time</p>
+                        <p><strong>Performance:</strong> Minimal allocation for time.Time conversion</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.New()
+defer tc.Stop()
+now := tc.CachedTime()
+fmt.Printf("Current time: %v\n", now)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+                    
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section10">CachedTimeString</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func (tc *TimeCache) CachedTimeString() string</code></pre>
+                        </div>
+                        <p>Returns the cached time formatted as an RFC3339Nano string. The returned string is in UTC timezone and follows the format: "2006-01-02T15:04:05.999999999Z07:00"</p>
+                        <p><strong>Returns:</strong> <code>string</code>: Formatted time string in RFC3339Nano format</p>
+                        <p><strong>Performance:</strong> String allocation for formatting</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.New()
+defer tc.Stop()
+timeStr := tc.CachedTimeString()
+fmt.Printf("ISO timestamp: %s\n", timeStr)</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section11">Resolution</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func (tc *TimeCache) Resolution() time.Duration</code></pre>
+                        </div>
+                        <p>Returns the update frequency of this cache. This is the interval at which the cached time value is refreshed by the background updater goroutine.</p>
+                        <p><strong>Returns:</strong> <code>time.Duration</code> - The update frequency of the cache</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.NewWithResolution(1 * time.Millisecond)
+defer tc.Stop()
+fmt.Printf("Cache updates every: %v\n", tc.Resolution())</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+                    
+                    <!-- code-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section12">Stop</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">func (tc *TimeCache) Stop()</code></pre>
+                        </div>
+                        <p>Permanently stops the time cache updater. After calling Stop, the cached time value will no longer be updated and the background goroutine will terminate.</p>
+                        <p><strong>Important:</strong> It is important to call Stop to prevent goroutine leaks when the cache is no longer needed.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">go</span>
+                                <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
+                            </div>
+                            <pre class="line-numbers"><code class="language-go">tc := timecache.New()
+// ... use the cache ...
+tc.Stop() // Clean up resources</code></pre>
+                        </div>
+                    </section>
+                    <!-- code-block end -->
+
+                    <!-- table-block -->
+                    <section class="content-section with-code">
+                        <h3 id="section13">Performance Characteristics</h3>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Allocations</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>CachedTimeNano()</code></td>
+                                        <td>0</td>
+                                        <td>Fastest</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>CachedTime()</code></td>
+                                        <td>1 (time.Time)</td>
+                                        <td>Fast</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>CachedTimeString()</code></td>
+                                        <td>1 (string)</td>
+                                        <td>Moderate</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <!-- table-block end -->
+
+                    <section class="content-section">
+                        <h3 id="section14">Error Handling</h3>
+                        <p>go-timecache is designed to be robust and doesn't return errors in normal operation. The only potential issues are:</p>
+                        <ul>
+                            <li><strong>Goroutine leaks:</strong> Always call <code>Stop()</code> on custom caches.</li>
+                            <li><strong>Stale time:</strong> After calling <code>Stop()</code>, the cached time becomes stale.</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <a href="https://github.com/agilira" target="_blank" rel="noopener" class="footer-logo-link">
+                            <img src="assets/logo-footer.png" alt="Agilira Logo" class="footer-logo" width="32" height="32" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; <span class="copyright-year">2025</span> <span class="copyright-holder">AGILira</span>. All rights reserved.
+                    </p>
+                    <div class="footer-legal">
+                        <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
+                        <a href="terms-of-service.html" class="footer-legal-link">Terms of Service</a>
+                        <a href="cookie-policy.html" class="footer-legal-link">Cookie Policy</a>
+                        <button type="button" class="cookie-consent-btn" id="cookieConsentBtn">Manage Cookies</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <p>We use cookies to improve your browsing experience and provide personalized features. By continuing to use this site, you accept our use of cookies.</p>
+            </div>
+            <div class="cookie-banner-actions">
+                <a href="docs/cookie-policy.html" class="cookie-policy-link">Cookie Policy</a>
+                <button type="button" class="cookie-accept-btn" id="cookieAcceptBtn">Accept</button>
+                <button type="button" class="cookie-decline-btn" id="cookieDeclineBtn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load configuration data (works with file:// protocol) -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Initialize configuration system
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('DOM loaded, initializing configuration...');
+            
+            // Initialize DocumentationApp first
+            window.documentationApp = new DocumentationApp();
+            
+            // Load and apply configuration
+            await window.chironConfig.load();
+            window.chironConfig.apply();
+            
+            console.log('All systems initialized');
+        });
+    </script>
+    
+    <!-- Prism.js is now loaded dynamically via script.js for better performance -->
+</body>
+</html>
