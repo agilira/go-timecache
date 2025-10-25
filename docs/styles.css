@@ -2462,7 +2462,11 @@ textarea:focus-visible {
 }
 
 /* WCAG 2.2 Focus Not Obscured - Ensure focus is always visible */
-*:focus-visible {
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
     z-index: 9999 !important;
     position: relative;
 }
@@ -2528,6 +2532,19 @@ textarea:focus-visible {
         right: 15px;
         width: 44px;
         height: 44px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .scroll-to-top:hover {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    [data-theme="dark"] .scroll-to-top {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    [data-theme="dark"] .scroll-to-top:hover {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
     }
 }
 
