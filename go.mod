@@ -1,4 +1,4 @@
 module github.com/agilira/go-timecache
 
-go 1.23
+go 1.25.9
 
