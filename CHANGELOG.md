@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Importing the package no longer costs CPU while idle. The default cache ran a
+  500µs ticker from `init`, about 2000 wake-ups per second and roughly 5% of a core
+  in every process that imports go-timecache (or go-errors), even when no time was
+  ever read. The updater now parks after 10 ticks without a reader; the next read
+  stores a fresh value itself and restarts it.
+- `TestStopDefaultCache` stopped the real default cache, breaking every later test
+  and every repetition under `-count`.
+
+### Changed
+- Reads now record that the cache is in use. The fast path is one atomic load:
+  `CachedTimeNano` 0.51 ns (was 0.36 ns), `CachedTime` 2.6 ns (was 0.35 ns; no longer
+  inlined), parallel reads 0.72 ns (was 0.17 ns). All remain allocation-free and well
+  below `time.Now()` at about 44 ns.
+
 ## [v1.0.3] - 2026-05-03
 
 ### Changed

@@ -19,23 +19,62 @@ import (
 // by a background goroutine. All access methods are thread-safe and provide
 // zero-allocation access to the cached time value.
 //
-// The cache automatically starts updating when created and must be stopped
-// explicitly to prevent goroutine leaks.
+// The updater runs only while the cache is being read. After idleTicks updates with
+// no reader it parks, and the process receives no more timer wake-ups; the next read
+// refreshes the value itself and restarts the updater. A cache that is created and
+// never read therefore costs nothing after its first few ticks.
+//
+// Call Stop when the cache is no longer needed, so the updater goroutine exits.
 type TimeCache struct {
 	// cachedTimeNano stores the current time in nanoseconds since Unix epoch.
 	// This field is accessed atomically and provides zero-allocation time access.
 	cachedTimeNano int64
 
+	// flags packs the updater state (bits 1-2) with a "read since the last tick" bit
+	// (bit 0), so the read fast path is a single atomic load.
+	flags int32
+
 	// ticker drives the periodic updates of the cached time value.
 	ticker *time.Ticker
 
+	// wake restarts a parked updater. Buffered so a reader never blocks.
+	wake chan struct{}
+
 	// stopCh is used to signal the background updater goroutine to stop.
 	stopCh chan struct{}
+
+	// done is closed when the updater goroutine has exited.
+	done chan struct{}
 
 	// resolution controls how frequently the cached time is updated.
 	// Smaller values provide more accurate timestamps but consume more CPU.
 	resolution time.Duration
 }
+
+// Updater states, stored in bits 1-2 of flags.
+const (
+	stateRunning int32 = iota
+	stateParked
+	stateStopped
+)
+
+const (
+	usedBit    int32 = 1
+	stateShift       = 1
+	stateMask  int32 = 3 << stateShift
+	// runningAndUsed is the steady state of a cache under load: the fast path.
+	runningAndUsed = stateRunning<<stateShift | usedBit
+)
+
+func stateOf(flags int32) int32 { return (flags & stateMask) >> stateShift }
+
+func withState(flags, state int32) int32 { return flags&^stateMask | state<<stateShift }
+
+// idleTicks is how many consecutive updates without a reader park the updater.
+// WHY 10: long enough that a steady reader never pays for a restart, short enough
+// that an idle process stops waking up within a few milliseconds at the default
+// resolution.
+const idleTicks = 10
 
 // defaultCache is the global time cache instance with default settings.
 // It is initialized automatically when the package is imported and provides
@@ -88,7 +127,9 @@ func New() *TimeCache {
 func NewWithResolution(resolution time.Duration) *TimeCache {
 	tc := &TimeCache{
 		resolution: resolution,
+		wake:       make(chan struct{}, 1),
 		stopCh:     make(chan struct{}),
+		done:       make(chan struct{}),
 	}
 
 	// Initialize with current time
@@ -105,13 +146,90 @@ func NewWithResolution(resolution time.Duration) *TimeCache {
 // This method is called automatically when a TimeCache is created
 // and runs until the cache is stopped.
 func (tc *TimeCache) updateLoop() {
+	defer close(tc.done)
+	defer tc.ticker.Stop()
+	idle := 0
 	for {
 		select {
 		case <-tc.ticker.C:
 			// Update cached time atomically - zero allocation
 			atomic.StoreInt64(&tc.cachedTimeNano, time.Now().UnixNano())
+			if idle = tc.countIdle(idle); idle < idleTicks {
+				continue
+			}
+			if !tc.park() {
+				return
+			}
+			idle = 0
 		case <-tc.stopCh:
-			tc.ticker.Stop()
+			return
+		}
+	}
+}
+
+func (tc *TimeCache) countIdle(idle int) int {
+	if atomic.AndInt32(&tc.flags, ^usedBit)&usedBit != 0 {
+		return 0
+	}
+	return idle + 1
+}
+
+// park stops the ticker and blocks until a reader needs fresh time. It returns false
+// when the cache was stopped.
+func (tc *TimeCache) park() bool {
+	tc.ticker.Stop()
+	for {
+		old := atomic.LoadInt32(&tc.flags)
+		if stateOf(old) != stateRunning {
+			return false
+		}
+		// WHY: a read that landed after the last tick saw "running" and will not wake
+		// us, so park only if nobody has read since; otherwise keep running.
+		if old&usedBit != 0 {
+			tc.ticker.Reset(tc.resolution)
+			return true
+		}
+		if atomic.CompareAndSwapInt32(&tc.flags, old, withState(old, stateParked)) {
+			break
+		}
+	}
+	select {
+	case <-tc.wake:
+		tc.ticker.Reset(tc.resolution)
+		return true
+	case <-tc.stopCh:
+		return false
+	}
+}
+
+// touch records a read. Its fast path, taken on every read while the cache is in use,
+// is one atomic load and is small enough to be inlined.
+func (tc *TimeCache) touch() {
+	if atomic.LoadInt32(&tc.flags) != runningAndUsed {
+		tc.touchSlow()
+	}
+}
+
+// touchSlow marks the cache as used and, if the updater is parked, refreshes the value
+// and restarts it.
+func (tc *TimeCache) touchSlow() {
+	for {
+		old := atomic.LoadInt32(&tc.flags)
+		switch stateOf(old) {
+		case stateStopped:
+			return
+		case stateRunning:
+			atomic.OrInt32(&tc.flags, usedBit)
+			return
+		}
+		// WHY store before the state change: a reader that observes "running" must
+		// also observe a fresh value, never the one left from before the park.
+		atomic.StoreInt64(&tc.cachedTimeNano, time.Now().UnixNano())
+		if atomic.CompareAndSwapInt32(&tc.flags, old, runningAndUsed) {
+			select {
+			case tc.wake <- struct{}{}:
+			default:
+			}
 			return
 		}
 	}
@@ -130,6 +248,7 @@ func (tc *TimeCache) updateLoop() {
 //	nano := tc.CachedTimeNano()
 //	fmt.Printf("Timestamp: %d nanoseconds\n", nano)
 func (tc *TimeCache) CachedTimeNano() int64 {
+	tc.touch()
 	return atomic.LoadInt64(&tc.cachedTimeNano)
 }
 
@@ -144,6 +263,7 @@ func (tc *TimeCache) CachedTimeNano() int64 {
 //	now := tc.CachedTime()
 //	fmt.Printf("Current time: %v\n", now)
 func (tc *TimeCache) CachedTime() time.Time {
+	tc.touch()
 	nanos := atomic.LoadInt64(&tc.cachedTimeNano)
 	return time.Unix(0, nanos)
 }
@@ -162,6 +282,7 @@ func (tc *TimeCache) CachedTime() time.Time {
 //	timeStr := tc.CachedTimeString()
 //	fmt.Printf("ISO timestamp: %s\n", timeStr)
 func (tc *TimeCache) CachedTimeString() string {
+	tc.touch()
 	nanos := atomic.LoadInt64(&tc.cachedTimeNano)
 	return time.Unix(0, nanos).UTC().Format(time.RFC3339Nano)
 }
@@ -192,6 +313,12 @@ func (tc *TimeCache) Resolution() time.Duration {
 //	// ... use the cache ...
 //	tc.Stop() // Clean up resources
 func (tc *TimeCache) Stop() {
+	for {
+		old := atomic.LoadInt32(&tc.flags)
+		if atomic.CompareAndSwapInt32(&tc.flags, old, withState(old, stateStopped)) {
+			break
+		}
+	}
 	close(tc.stopCh)
 }
 

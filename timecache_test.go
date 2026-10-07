@@ -209,8 +209,11 @@ func TestDefaultCache(t *testing.T) {
 }
 
 func TestStopDefaultCache(t *testing.T) {
-	// First, ensure default cache is initialized
-	DefaultCache()
+	// WHY a replacement cache: stopping the real default would leave it frozen for
+	// every later test, and for every repetition under -count.
+	original := defaultCache
+	defaultCache = New()
+	t.Cleanup(func() { defaultCache = original })
 
 	// Get initial time from default cache
 	initial := CachedTimeNano()
@@ -231,6 +234,4 @@ func TestStopDefaultCache(t *testing.T) {
 			initial, after)
 	}
 
-	// After tests, reinitialize default cache for other tests
-	DefaultCache()
 }

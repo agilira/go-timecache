@@ -18,6 +18,7 @@ Part of our Xantos Core, `go-timecache` provides zero-allocation access to cache
 - **Zero-allocation time access**: Get current time without heap allocations
 - **Configurable precision**: Choose your ideal balance between accuracy and performance
 - **Thread-safe**: Safe for concurrent use from multiple goroutines
+- **Idle costs nothing**: the updater parks when nobody reads the cache, so an idle process gets no timer wake-ups; the next read refreshes the value and restarts it
 - **Simple API**: Drop-in replacement for `time.Now()` with minimal code changes
 - **Multiple formats**: Access time as `time.Time`, nanoseconds, or formatted string
 
@@ -31,12 +32,12 @@ Benchmarks show dramatic improvements over standard `time.Now()`:
 
 ```
 AMD Ryzen 5 7520U with Radeon Graphics
-BenchmarkTimeNow-8                      25118025           42.98 ns/op          0 B/op         0 allocs/op
-BenchmarkCachedTime-8                   1000000000         0.3549 ns/op         0 B/op         0 allocs/op
-BenchmarkCachedTimeNano-8               1000000000         0.3574 ns/op         0 B/op         0 allocs/op
-BenchmarkTimeNowUnixNano-8              27188656           42.68 ns/op          0 B/op         0 allocs/op
-BenchmarkCachedTimeParallel-8           1000000000         0.1737 ns/op         0 B/op         0 allocs/op
-BenchmarkTimeNowParallel-8              184139052          6.417 ns/op          0 B/op         0 allocs/op
+BenchmarkTimeNow-8                      27495522           44.35 ns/op          0 B/op         0 allocs/op
+BenchmarkCachedTime-8                   457731061           2.595 ns/op         0 B/op         0 allocs/op
+BenchmarkCachedTimeNano-8               1000000000          0.5139 ns/op         0 B/op         0 allocs/op
+BenchmarkTimeNowUnixNano-8              27020379           43.52 ns/op          0 B/op         0 allocs/op
+BenchmarkCachedTimeParallel-8           1000000000          0.7152 ns/op         0 B/op         0 allocs/op
+BenchmarkTimeNowParallel-8              166697638           7.231 ns/op         0 B/op         0 allocs/op
 ```
 
 **Reproduce benchmarks**:
@@ -44,8 +45,9 @@ BenchmarkTimeNowParallel-8              184139052          6.417 ns/op          
 go test -bench=. -benchmem
 ```
 
-* `CachedTime` is **~121x faster** than `time.Now()`
-* `CachedTimeParallel` is **~37x faster** than parallel `time.Now()`
+* `CachedTimeNano` is **~85x faster** than `time.Now().UnixNano()`, `CachedTime` **~17x faster** than `time.Now()`
+* `CachedTimeParallel` is **~10x faster** than parallel `time.Now()`
+* An idle process importing the package uses no CPU: the updater parks after 10 ticks without a reader
 * Zero heap allocations in all operations
 
 ## Quick Start
