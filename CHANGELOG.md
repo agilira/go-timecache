@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.0.4] - 2026-10-07
+
 ### Fixed
 - Importing the package no longer costs CPU while idle. The default cache ran a
   500µs ticker from `init`, about 2000 wake-ups per second and roughly 5% of a core

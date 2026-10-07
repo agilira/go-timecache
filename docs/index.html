@@ -236,18 +236,18 @@ customTime := tc.CachedTime()</code></pre>
                     <hr>
                     <section class="content-section" id="performance">
                         <h2>Performance</h2>
-                        <p><code>CachedTime</code> is ~121x faster than <code>time.Now()</code> and <code>CachedTimeParallel</code> is ~37x faster than parallel <code>time.Now()</code> with Zero allocations in all ops.</p>
+                        <p><code>CachedTimeNano</code> is ~85x faster than <code>time.Now().UnixNano()</code>, <code>CachedTime</code> ~17x faster than <code>time.Now()</code> and <code>CachedTimeParallel</code> ~10x faster than parallel <code>time.Now()</code>, with zero allocations in all operations. An idle process that imports the package uses no CPU.</p>
                         <div class="code-block">
                             <div class="code-header">
                                 <span class="code-language">bash</span>
                                 <button type="button" class="code-copy" aria-label="Copy code">Copy</button>
                             </div>
-                            <pre class="line-numbers"><code class="language-bash">BenchmarkTimeNow-8                      25118025    42.98 ns/op    0 B/op    0 allocs/op
-BenchmarkCachedTime-8                   1000000000   0.3549 ns/op  0 B/op    0 allocs/op
-BenchmarkCachedTimeNano-8               1000000000   0.3574 ns/op  0 B/op    0 allocs/op
-BenchmarkTimeNowUnixNano-8              27188656    42.68 ns/op    0 B/op    0 allocs/op
-BenchmarkCachedTimeParallel-8           1000000000   0.1737 ns/op  0 B/op    0 allocs/op
-BenchmarkTimeNowParallel-8              184139052    6.417 ns/op   0 B/op    0 allocs/op</code></pre>
+                            <pre class="line-numbers"><code class="language-bash">BenchmarkTimeNow-8                      27495522    44.35 ns/op    0 B/op    0 allocs/op
+BenchmarkCachedTime-8                   457731061    2.595 ns/op   0 B/op    0 allocs/op
+BenchmarkCachedTimeNano-8               1000000000   0.5139 ns/op  0 B/op    0 allocs/op
+BenchmarkTimeNowUnixNano-8              27020379    43.52 ns/op    0 B/op    0 allocs/op
+BenchmarkCachedTimeParallel-8           1000000000   0.7152 ns/op  0 B/op    0 allocs/op
+BenchmarkTimeNowParallel-8              166697638    7.231 ns/op   0 B/op    0 allocs/op</code></pre>
                         </div>
                         <h3>Reproduce Benchmarks</h3>
                         <div class="code-block">
@@ -266,7 +266,7 @@ BenchmarkTimeNowParallel-8              184139052    6.417 ns/op   0 B/op    0 a
                             
                             <h3>Why should I use go-timecache instead of time.Now()?</h3>
                             <ul>
-                                <li><strong>Performance</strong>: go-timecache is ~121x faster than <code>time.Now()</code></li>
+                                <li><strong>Performance</strong>: <code>CachedTimeNano</code> is ~85x faster than <code>time.Now().UnixNano()</code></li>
                                 <li><strong>Zero allocations</strong>: No heap allocations for time access</li>
                                 <li><strong>Consistency</strong>: Predictable performance regardless of system load</li>
                                 <li><strong>Configurable precision</strong>: Choose the right balance between accuracy and CPU usage</li>
@@ -276,7 +276,7 @@ BenchmarkTimeNowParallel-8              184139052    6.417 ns/op   0 B/op    0 a
                             <p>Yes, all methods are thread-safe and can be called concurrently from multiple goroutines without additional synchronization.</p>
                             
                             <h3>How does it work internally?</h3>
-                            <p>go-timecache runs a background goroutine that updates a cached timestamp at regular intervals. All access methods use atomic operations to read the cached value safely.</p>
+                            <p>go-timecache runs a background goroutine that updates a cached timestamp at regular intervals while the cache is being read. After 10 updates with no reader it parks, so an idle process receives no timer wake-ups; the next read stores a fresh timestamp itself and restarts the updater. All access methods use atomic operations to read the cached value safely.</p>
                             
                             <h3>What's the precision of the cached time?</h3>
                             <p>The precision depends on the resolution you choose. The default 500&micro;s resolution means the cached time is updated every 500 microseconds.</p>
